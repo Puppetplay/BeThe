@@ -1,0 +1,56 @@
+﻿DROP TABLE Schedule_W;
+
+CREATE TABLE Schedule_W
+(
+	Id						BIGINT			NOT NULL		PRIMARY KEY	IDENTITY,
+
+	Year					INTEGER			NOT NULL,
+	Month					INTEGER			NOT NULL,
+	Day						INTEGER			NOT NULL,
+
+	Time					NCHAR(5)		NULL,
+	Play					NVARCHAR(1000)	NULL,
+	Relay					NVARCHAR(1000)	NULL,
+	BallPark				NCHAR(20)		NULL,
+	Etc						NVARCHAR(1000)	NULL,
+	InsertDateTime			DATETIME		DEFAULT			CURRENT_TIMESTAMP
+);
+
+DROP TABLE Schedule;
+CREATE TABLE Schedule
+(
+	Id						BIGINT			NOT NULL		PRIMARY KEY	IDENTITY,
+
+	Year					INTEGER			NOT NULL,
+	Month					INTEGER			NOT NULL,
+	Day						INTEGER			NOT NULL,
+
+	Hour 					INTEGER			NULL,
+	Minute 					INTEGER			NULL,
+
+	BallPark				NVARCHAR(10)		NULL,
+
+	HomeTeam				NVARCHAR(10)		NOT NULL,
+	AwayTeam				NVARCHAR(10)		NOT NULL,
+
+	HomeTeamScore			INTEGER			NULL,
+	AwayTeamScore			INTEGER			NULL,
+
+	Href					NVARCHAR(200)	NULL,
+	GameId					NCHAR(13)		NULL,
+	
+	Etc						NVARCHAR(1000)	NULL,
+	InsertDateTime			DATETIME		DEFAULT			CURRENT_TIMESTAMP
+);
+
+
+DROP TABLE Relay_W;
+CREATE TABLE Relay_W
+(
+	Id						BIGINT			NOT NULL		PRIMARY KEY	IDENTITY,
+	GameId					NCHAR(13)		NULL,
+	Content					TEXT			NOT NULL,
+	InsertDateTime			DATETIME		DEFAULT			CURRENT_TIMESTAMP
+);
+
+
