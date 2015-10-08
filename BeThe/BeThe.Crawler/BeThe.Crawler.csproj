@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrawlerBase.cs" />
+    <Compile Include="CrawlerPlayer.cs" />
     <Compile Include="CrawlerRelay.cs" />
     <Compile Include="CrawlerSchedule.cs" />
     <Compile Include="Manager.cs" />

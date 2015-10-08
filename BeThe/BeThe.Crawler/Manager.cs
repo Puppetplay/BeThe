@@ -60,6 +60,19 @@ namespace BeThe.Crawler
            
         }
 
+        // 플레이어 정보 얻기
+        public List<Player> GetPlayer(String teamName)
+        {
+            InitCromeDriver();
+            for (Int32 i = 1; i < 7; ++i)
+            {
+                CrawlerPlayer crawler = new CrawlerPlayer(chromeDriver);
+                crawler.Init(teamName, i);
+                String html = crawler.GetHTML();
+            }
+            return null;
+        }
+
         public void Dispose()
         {
             if (chromeDriver != null)
@@ -76,14 +89,11 @@ namespace BeThe.Crawler
 
         private void InitCromeDriver()
         {
-            if (chromeDriver == null)
-            {
-                var chromeDriverService = ChromeDriverService.CreateDefaultService();
-                var chromeOptions = new ChromeOptions();
-                chromeDriverService.HideCommandPromptWindow = true;
-                chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
-                chromeDriver.Manage().Window.Size = new Size(0, 0);
-            }
+            var chromeDriverService = ChromeDriverService.CreateDefaultService();
+            var chromeOptions = new ChromeOptions();
+            chromeDriverService.HideCommandPromptWindow = true;
+            chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
+            chromeDriver.Manage().Window.Size = new Size(0, 0);
         }
 
         #endregion

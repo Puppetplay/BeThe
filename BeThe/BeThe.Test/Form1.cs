@@ -25,8 +25,9 @@ namespace BeThe.Test
             var manager = new BeThe.Manager.Manager();
             try
             {
-                manager.SelectAllSchedule();
-                manager.SelectRelay();
+                //manager.SelectAllSchedule();
+                //manager.SelectRelay();
+                manager.SeletePlayer();
             }
             catch(Exception exception)
             {

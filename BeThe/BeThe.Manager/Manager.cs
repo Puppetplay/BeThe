@@ -130,5 +130,11 @@ namespace BeThe.Manager
                 crawlerMgr.Dispose();
             }
         }
+
+        public void SeletePlayer()
+        {
+            var crawlerMgr = BeThe.Crawler.Manager.Instance;
+            var players = crawlerMgr.GetPlayer("삼성");
+        }
     }
 }
