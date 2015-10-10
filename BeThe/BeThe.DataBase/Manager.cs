@@ -12,8 +12,8 @@ namespace BeThe.DataBase
     {
         #region ♥ Property & Values
 
-        private readonly static String DATA_SOURCE = "10.105.3.211";
-        //private readonly static String DATA_SOURCE = "MIN-PC";
+        //private readonly static String DATA_SOURCE = "10.105.3.211";
+        private readonly static String DATA_SOURCE = "MIN-PC";
         private readonly static String USER_ID = "sa";
         private readonly static String PASSWORD = "1";
         private readonly static String CATALOG = "BETHEBE";

@@ -71,11 +71,11 @@ namespace BeThe.Manager
             var crawlerMgr = BeThe.Crawler.Manager.Instance;
             var dbMgr = new BeThe.DataBase.Manager();
 
-            var DataContext = dbMgr.DataContext;
+            var dataContext = dbMgr.DataContext;
             var querySchedule = dbMgr.SelectAll<Schedule>();
             var queryRelay = dbMgr.SelectAll<Relay_W>();
 
-            var relayTable = DataContext.GetTable<Relay_W>();
+            var relayTable = dataContext.GetTable<Relay_W>();
 
             var schedules =
                     (from schedule in querySchedule
@@ -131,10 +131,100 @@ namespace BeThe.Manager
             }
         }
 
-        public void SeletePlayer()
+        public void SelectPlayer_W()
         {
             var crawlerMgr = BeThe.Crawler.Manager.Instance;
-            var players = crawlerMgr.GetPlayer("삼성");
+            var dbMgr = new BeThe.DataBase.Manager();
+           
+            var allPlayers = dbMgr.SelectAll<Player_W>();
+
+            // 기존데이터 삭제
+            var playerTable = dbMgr.DataContext.GetTable<Player_W>();
+            foreach (var player in allPlayers)
+            {
+                playerTable.DeleteOnSubmit(player);
+            }
+
+            foreach(String team in Util.Util.Teams)
+            {
+                Int32 errorCount = 0;
+                Boolean isError = true;
+                String teamName = team;
+                if(teamName == "KT")
+                {
+                    teamName = "kt";
+                }
+                while (isError)
+                {
+                    try
+                    {
+                        var players = crawlerMgr.GetPlayer_W(teamName);
+                        dbMgr.Save(players);
+                        isError = false;
+                    }
+                    catch (OpenQA.Selenium.StaleElementReferenceException exception)
+                    {
+                        if (errorCount < 10)
+                        {
+                            errorCount++;
+                            continue;
+                        }
+                        else
+                        {
+                            throw exception;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        public void SelectPlayer()
+        {
+            var crawlerMgr = BeThe.Crawler.Manager.Instance;
+            var dbMgr = new BeThe.DataBase.Manager();
+            var allPlayers_W = dbMgr.SelectAll<Player_W>();
+            var allPlayers = dbMgr.SelectAll<Player>();
+
+            // 기존데이터 삭제
+            var playerTable = dbMgr.DataContext.GetTable<Player>();
+            foreach (var player in allPlayers)
+            {
+                playerTable.DeleteOnSubmit(player);
+            }
+
+            List<Player> players = new List<Player>();
+            foreach(var player_W in allPlayers_W)
+            {
+                Int32 errorCount = 0;
+                Boolean isError = true;
+                while (isError)
+                {
+                    try
+                    {
+                        var player = crawlerMgr.GetPlayer(player_W);
+                        if(player != null)
+                        {
+                            players.Add(player);
+                        }
+                        isError = false;
+                    }
+                    catch (OpenQA.Selenium.StaleElementReferenceException exception)
+                    {
+                        if (errorCount < 10)
+                        {
+                            errorCount++;
+                            continue;
+                        }
+                        else
+                        {
+                            throw exception;
+                        }
+                    }
+                }
+            }
+            dbMgr.Save(players);
+            crawlerMgr.Dispose();
         }
     }
 }

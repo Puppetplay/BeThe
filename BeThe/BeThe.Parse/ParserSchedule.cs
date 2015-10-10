@@ -128,8 +128,8 @@ namespace BeThe.Parse
             doc.LoadHtml(schedule_W.Play);
             var nodes = doc.DocumentNode.SelectNodes("span");
 
-            schedule.AwayTeam = ConvertTeam(nodes[0].InnerHtml);
-            schedule.HomeTeam = ConvertTeam(nodes[1].InnerHtml);
+            schedule.AwayTeam = Util.Util.ConvertTeam(nodes[0].InnerHtml);
+            schedule.HomeTeam = Util.Util.ConvertTeam(nodes[1].InnerHtml);
 
             if (schedule_W.Etc == "-")
             {

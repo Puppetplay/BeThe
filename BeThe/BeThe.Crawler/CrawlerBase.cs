@@ -63,6 +63,19 @@ namespace BeThe.Crawler
             nextButton.Click();
         }
 
+        protected Boolean IsExistElement(String id)
+        {
+            try
+            {
+                driver.FindElementById(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         protected void Sleep(Int32 tick)
         {
             System.Threading.Thread.Sleep(tick);

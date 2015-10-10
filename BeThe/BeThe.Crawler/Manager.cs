@@ -4,6 +4,8 @@ using System.Drawing;
 using BeThe.Items;
 using HtmlAgilityPack;
 using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
+using System.Linq;
 
 namespace BeThe.Crawler
 {
@@ -60,20 +62,54 @@ namespace BeThe.Crawler
            
         }
 
-        // 플레이어 정보 얻기
-        public List<Player> GetPlayer(String teamName)
+        // Player_W 정보 얻기
+        public List<Player_W> GetPlayer_W(String teamName)
+        {
+            try
+            {
+                InitCromeDriver();
+                String teamInitial = Util.Util.ConvertTeam(teamName);
+                List<Player_W> players = new List<Player_W>();
+                for (Int32 i = 1; i < 7; ++i)
+                {
+                    CrawlerPlayer_W crawler = new CrawlerPlayer_W(chromeDriver);
+                    crawler.Init(teamName, i);
+                    String html = crawler.GetHTML();
+                    if (html != null)
+                    {
+                        players = players.Concat(BeThe.Parse.Manager.Instance.ParsePlayer_W(html, teamInitial)).ToList();
+                    }
+                }
+                return players;
+            }
+            finally
+            {
+                DisposeDriver();
+            }
+           
+        }
+
+        // Player 정보 얻기
+        public Player GetPlayer(Player_W player_W)
         {
             InitCromeDriver();
-            for (Int32 i = 1; i < 7; ++i)
-            {
-                CrawlerPlayer crawler = new CrawlerPlayer(chromeDriver);
-                crawler.Init(teamName, i);
-                String html = crawler.GetHTML();
-            }
-            return null;
+            CrawlerPlayer crawler = new CrawlerPlayer(chromeDriver);
+            crawler.Init(player_W.Href);
+            
+            String html = crawler.GetHTML();
+
+            String[] items = player_W.Href.Split(new String[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+            Int32 playerId = Convert.ToInt32(items[items.Length - 1]);
+            var player = BeThe.Parse.Manager.Instance.ParsePlayer(html, player_W.Team, playerId);
+            return player;
         }
 
         public void Dispose()
+        {
+            DisposeDriver();
+        }
+
+        private void DisposeDriver()
         {
             if (chromeDriver != null)
             {
@@ -89,11 +125,14 @@ namespace BeThe.Crawler
 
         private void InitCromeDriver()
         {
-            var chromeDriverService = ChromeDriverService.CreateDefaultService();
-            var chromeOptions = new ChromeOptions();
-            chromeDriverService.HideCommandPromptWindow = true;
-            chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
-            chromeDriver.Manage().Window.Size = new Size(0, 0);
+            if (chromeDriver == null)
+            {
+                var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                var chromeOptions = new ChromeOptions();
+                chromeDriverService.HideCommandPromptWindow = true;
+                chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
+                chromeDriver.Manage().Window.Size = new Size(0, 0);
+            }
         }
 
         #endregion

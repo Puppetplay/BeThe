@@ -37,6 +37,16 @@ namespace BeThe.Parse
             return ParserShedule.Instance.Parse(html, year, month);
         }
 
+        public List<Player_W> ParsePlayer_W(String html, String team)
+        {
+            return ParserPlayer_W.Instance.Parse(html, team);
+        }
+
+        public Player ParsePlayer(String html, String team, Int32 playerId)
+        {
+            return ParserPlayer.Instance.Parse(html, team, playerId);
+        }
+
         #endregion
     }
 }

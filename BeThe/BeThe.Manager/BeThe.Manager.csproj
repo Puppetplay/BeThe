@@ -69,6 +69,10 @@
       <Project>{264217c6-417b-490f-82dd-8f82bea5a530}</Project>
       <Name>BeThe.Parse</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeThe.Util\BeThe.Util.csproj">
+      <Project>{88734e88-a05f-4551-857b-0b681df2eeb2}</Project>
+      <Name>BeThe.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

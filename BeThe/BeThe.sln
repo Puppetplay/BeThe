@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeThe.Items", "BeThe.Items\BeThe.Items.csproj", "{712391E3-1A8D-44E8-8A02-C592D39400EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeThe.Crawler", "BeThe.Crawler\BeThe.Crawler.csproj", "{2C7EB1B7-8689-46FB-BC19-437CB412F867}"
@@ -12,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeThe.Manager", "BeThe.Manager\BeThe.Manager.csproj", "{E6950738-AF7C-4C73-A967-EE1341337803}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeThe.DataBase", "BeThe.DataBase\BeThe.DataBase.csproj", "{22432099-9472-4359-8903-10F9E53389F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeThe.Util", "BeThe.Util\BeThe.Util.csproj", "{88734E88-A05F-4551-857B-0B681DF2EEB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{22432099-9472-4359-8903-10F9E53389F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22432099-9472-4359-8903-10F9E53389F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22432099-9472-4359-8903-10F9E53389F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88734E88-A05F-4551-857B-0B681DF2EEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88734E88-A05F-4551-857B-0B681DF2EEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88734E88-A05F-4551-857B-0B681DF2EEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88734E88-A05F-4551-857B-0B681DF2EEB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,8 @@ namespace BeThe.Test
             {
                 //manager.SelectAllSchedule();
                 //manager.SelectRelay();
-                manager.SeletePlayer();
+                //manager.SelectPlayer_W();
+                manager.SelectPlayer();
             }
             catch(Exception exception)
             {
